@@ -11,7 +11,6 @@ DROP TABLE IF EXISTS customer CASCADE;
 DROP TABLE IF EXISTS address CASCADE;
 DROP TABLE IF EXISTS salesman CASCADE;
 
-
 CREATE TABLE salesman
 (
     salesman_id SERIAL      NOT NULL,
@@ -28,8 +27,8 @@ CREATE TABLE address
     country     VARCHAR(32) NOT NULL,
     city        VARCHAR(32) NOT NULL,
     postal_code VARCHAR(32) NOT NULL,
-    address     VARCHAR(32) NOT NULL
-        PRIMARY KEY (address_id)
+    address     VARCHAR(32) NOT NULL,
+    PRIMARY KEY (address_id)
 );
 
 CREATE TABLE customer
@@ -40,11 +39,11 @@ CREATE TABLE customer
     telephone   VARCHAR(32) NOT NULL,
     email       VARCHAR(32) NOT NULL,
     address_id  INT         NOT NULL,
-    PRIMARY KEY (address_id),
+    PRIMARY KEY (customer_id),
     UNIQUE (email),
     CONSTRAINT fk_customer_address
-        FOREIGN KEY (address_id),
-    REFERENCES  address (address_id)
+        FOREIGN KEY (address_id)
+            REFERENCES address (address_id)
 );
 
 CREATE TABLE car_to_buy
@@ -79,14 +78,14 @@ CREATE TABLE service
     service_code VARCHAR(32)    NOT NULL,
     description  VARCHAR(64)    NOT NULL,
     price        NUMERIC(19, 2) NOT NULL,
-    PRIMARY KEY (service_id),
+    PRIMARY KEY (service_id)
 );
 
 CREATE TABLE part
 (
-    part_id       SERIAL        NOT NULL,
-    serial_number VARCHAR(32)   NOT NULL,
-    description   VARCHAR(64)   NOT NULL,
+    part_id       SERIAL         NOT NULL,
+    serial_number VARCHAR(32)    NOT NULL,
+    description   VARCHAR(64)    NOT NULL,
     price         NUMERIC(19, 2) NOT NULL,
     PRIMARY KEY (part_id),
     UNIQUE (serial_number)
@@ -98,7 +97,7 @@ CREATE TABLE mechanic
     name        VARCHAR(32) NOT NULL,
     surname     VARCHAR(32) NOT NULL,
     pesel       VARCHAR(32) NOT NULL,
-    PRIMARY KEY (mechanic_id),
+    PRIMARY KEY (mechanic_id)
 );
 
 CREATE TABLE car_service_request
@@ -113,12 +112,12 @@ CREATE TABLE car_service_request
     PRIMARY KEY (car_service_request_id),
     UNIQUE (car_service_request_number),
     CONSTRAINT fk_car_service_request_customer
-        FOREIGN KEY (customer_id),
-    REFERENCES                 customer (customer_id),
+        FOREIGN KEY (customer_id)
+            REFERENCES customer (customer_id),
 
     CONSTRAINT fk_car_service_request_car
-        FOREIGN KEY (car_to_service_id),
-    REFERENCES                 car_to_service (car_to_service_id),
+        FOREIGN KEY (car_to_service_id)
+            REFERENCES car_to_service (car_to_service_id)
 );
 
 CREATE TABLE invoice
@@ -130,18 +129,18 @@ CREATE TABLE invoice
     customer_id    INT                      NOT NULL,
     salesman_id    INT                      NOT NULL,
     PRIMARY KEY (invoice_id),
-    UNIQUE (invoice_number)
-        CONSTRAINT fk_invoice_car
-        FOREIGN KEY (car_to_buy_id),
-    REFERENCES     car_to_buy (car_to_buy_id),
+    UNIQUE (invoice_number),
+    CONSTRAINT fk_invoice_car
+        FOREIGN KEY (car_to_buy_id)
+            REFERENCES car_to_buy (car_to_buy_id),
 
     CONSTRAINT fk_invoice_customer
-        FOREIGN KEY (customer_id),
-    REFERENCES     customer (customer_id),
+        FOREIGN KEY (customer_id)
+            REFERENCES customer (customer_id),
 
     CONSTRAINT fk_invoice_salesman
-        FOREIGN KEY (salesman_id),
-    REFERENCES     salesman (salesman_id),
+        FOREIGN KEY (salesman_id)
+            REFERENCES salesman (salesman_id)
 );
 
 CREATE TABLE service_part
@@ -153,12 +152,12 @@ CREATE TABLE service_part
     PRIMARY KEY (service_part_id),
 
     CONSTRAINT fk_service_part_service_request
-        FOREIGN KEY (car_service_request_id),
-    REFERENCES             car_service_request (car_service_request_id),
+        FOREIGN KEY (car_service_request_id)
+            REFERENCES car_service_request (car_service_request_id),
 
     CONSTRAINT fk_service_part_part
-        FOREIGN KEY (part_id),
-    REFERENCES             part (part_id),
+        FOREIGN KEY (part_id)
+            REFERENCES part (part_id)
 );
 
 CREATE TABLE service_mechanic
@@ -172,52 +171,17 @@ CREATE TABLE service_mechanic
     PRIMARY KEY (service_mechanic_id),
 
     CONSTRAINT fk_service_mechanic_car_service_request
-        FOREIGN KEY (car_service_request_id),
-    REFERENCES             car_service_request (car_service_request_id),
+        FOREIGN KEY (car_service_request_id)
+            REFERENCES car_service_request (car_service_request_id),
 
     CONSTRAINT fk_service_mechanic_mechanic
-        FOREIGN KEY (mechanic_id),
-    REFERENCES             mechanic (mechanic_id),
+        FOREIGN KEY (mechanic_id)
+            REFERENCES mechanic (mechanic_id),
 
     CONSTRAINT fk_service_mechanic_service
-        FOREIGN KEY (service_id),
-    REFERENCES             service (service_id),
+        FOREIGN KEY (service_id)
+            REFERENCES service (service_id)
 );
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 
 
