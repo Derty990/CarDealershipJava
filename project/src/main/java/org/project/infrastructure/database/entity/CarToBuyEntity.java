@@ -7,8 +7,8 @@ import java.math.BigDecimal;
 
 @Getter
 @Setter
-@EqualsAndHashCode(of = "CarToBuyId")
-@ToString(of = {"CarToBuyId", "vin", "brand", "model", "year"})
+@EqualsAndHashCode(of = "carToBuyId")
+@ToString(of = {"carToBuyId", "vin", "brand", "model", "year"})
 @Builder
 @NoArgsConstructor
 @AllArgsConstructor
@@ -19,7 +19,7 @@ public class CarToBuyEntity {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "car_to_buy_id")
-    private Integer CarToBuyId;
+    private Integer carToBuyId;
 
     @Column(name = "vin", unique = true)
     private String vin;

@@ -24,8 +24,8 @@ public class HibernateUtil {
             Map.entry(Environment.DIALECT, "org.hibernate.dialect.PostgreSQLDialect"),
             Map.entry(Environment.CONNECTION_PROVIDER, "com.zaxxer.hikari.hibernate.HikariConnectionProvider"),
             Map.entry(Environment.HBM2DDL_AUTO, "validate"),
-            Map.entry(Environment.HBM2DDL_AUTO, true),
-            Map.entry(Environment.HBM2DDL_AUTO, false)
+            Map.entry(Environment.SHOW_SQL, true),
+            Map.entry(Environment.FORMAT_SQL, false)
     );
 
     private static final Map<String, Object> HIKARI_CP_SETTINGS = Map.ofEntries(

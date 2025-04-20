@@ -40,5 +40,8 @@ public class CustomerEntity {
     @OneToMany(fetch = FetchType.EAGER, mappedBy = "customer")
     private Set<InvoiceEntity> invoices;
 
+    @OneToMany(fetch = FetchType.EAGER, mappedBy = "customer")
+    private Set<CarServiceRequestEntity> carServiceRequests;
+
 }
 
