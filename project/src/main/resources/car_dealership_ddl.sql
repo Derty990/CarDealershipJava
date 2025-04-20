@@ -1,12 +1,12 @@
 DROP TABLE IF EXISTS service_mechanic CASCADE;
 DROP TABLE IF EXISTS service_part CASCADE;
-DROP TABLE IF EXISTS service_request CASCADE;
+DROP TABLE IF EXISTS car_service_request CASCADE;
 DROP TABLE IF EXISTS invoice CASCADE;
 DROP TABLE IF EXISTS mechanic CASCADE;
 DROP TABLE IF EXISTS part CASCADE;
 DROP TABLE IF EXISTS service CASCADE;
 DROP TABLE IF EXISTS car_to_service CASCADE;
-DROP TABLE IF EXISTS car CASCADE;
+DROP TABLE IF EXISTS car_to_buy CASCADE;
 DROP TABLE IF EXISTS customer CASCADE;
 DROP TABLE IF EXISTS address CASCADE;
 DROP TABLE IF EXISTS salesman CASCADE;
@@ -36,7 +36,7 @@ CREATE TABLE customer
     customer_id SERIAL      NOT NULL,
     name        VARCHAR(32) NOT NULL,
     surname     VARCHAR(32) NOT NULL,
-    telephone   VARCHAR(32) NOT NULL,
+    phone       VARCHAR(32) NOT NULL,
     email       VARCHAR(32) NOT NULL,
     address_id  INT         NOT NULL,
     PRIMARY KEY (customer_id),
@@ -182,6 +182,4 @@ CREATE TABLE service_mechanic
         FOREIGN KEY (service_id)
             REFERENCES service (service_id)
 );
-
-
 
