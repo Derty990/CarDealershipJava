@@ -3,11 +3,28 @@ package org.project.integration;
 
 import lombok.extern.slf4j.Slf4j;
 import org.junit.jupiter.api.*;
+import org.project.business.management.CarDealershipManagementService;
+import org.project.business.management.FileDataPreparationService;
+import org.project.business.management.InputDataCache;
 import org.project.infrastructure.configuration.HibernateUtil;
+import org.project.infrastructure.database.repository.CarDealershipManagementRepository;
+
+import java.util.List;
+import java.util.Map;
 
 @Slf4j
 @TestMethodOrder(MethodOrderer.OrderAnnotation.class)
 public class CarDealershipTest {
+
+    private CarDealershipManagementService carDealershipManagementService;
+
+    @BeforeEach
+    void beforeEach(){
+        this.carDealershipManagementService = new CarDealershipManagementService(
+            new CarDealershipManagementRepository(),
+                new FileDataPreparationService()
+        );
+    }
 
     @AfterAll
     static void afterAll(){
@@ -18,12 +35,16 @@ public class CarDealershipTest {
     @Order(1)
     void purge(){
         log.info("### RUNNING ORDER 1");
+       carDealershipManagementService.purge();
+
+
     }
 
     @Test
     @Order(2)
     void init(){
         log.info("### RUNNING ORDER 2");
+        carDealershipManagementService.init();
     }
 
     @Test
