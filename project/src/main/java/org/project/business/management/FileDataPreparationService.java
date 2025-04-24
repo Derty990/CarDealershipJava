@@ -2,6 +2,7 @@ package org.project.business.management;
 
 
 import jakarta.persistence.*;
+import org.project.domain.CarServiceProcessingRequest;
 import org.project.domain.CarServiceRequest;
 import org.project.infrastructure.database.entity.*;
 
@@ -61,8 +62,7 @@ public class FileDataPreparationService {
 
     public List<CarServiceRequest> createCarServiceRequests() {
 
-        return InputDataCache.getInputData(Keys.InputDataGroup.SERVICE_REQUEST, this::prepareMap)
-                .stream()
+        return InputDataCache.getInputData(Keys.InputDataGroup.SERVICE_REQUEST, this::prepareMap).stream()
                 .map(this::createCarServiceRequest)
                 .toList();
 
@@ -115,6 +115,31 @@ public class FileDataPreparationService {
                 .brand(inputData.get(1))
                 .model(inputData.get(2))
                 .year(Integer.parseInt(inputData.get(3)))
+                .build();
+
+    }
+
+    public List<CarServiceProcessingRequest> prepareServiceRequestsToProcess() {
+
+        return InputDataCache.getInputData(Keys.InputDataGroup.DO_THE_SERVICE, this::prepareMap).stream()
+                .map(this::createCarServiceRequestToProcess)
+                .toList();
+
+    }
+
+    private CarServiceProcessingRequest createCarServiceRequestToProcess(Map<String, List<String>> inputData) {
+
+        List<String> whats = inputData.get(Keys.CONSTANTS.WHAT.toString());
+
+        return CarServiceProcessingRequest.builder()
+                .mechanicPesel(inputData.get(Keys.Entity.MECHANIC.toString()).get(0))
+                .carVin(inputData.get(Keys.Entity.CAR.toString()).get(0))
+                .partSerialNumber(Optional.ofNullable(whats.get(0)).filter(value -> !value.isBlank()).orElse(null))
+                .partQuantity(Optional.ofNullable(whats.get(1)).filter(value -> !value.isBlank()).map(Integer::parseInt).orElse(null))
+                .serviceCode(whats.get(2))
+                .hours(Integer.parseInt(whats.get(3)))
+                .comment(whats.get(4))
+                .done(whats.get(5))
                 .build();
 
     }

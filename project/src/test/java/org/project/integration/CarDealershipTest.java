@@ -3,37 +3,45 @@ package org.project.integration;
 import lombok.extern.slf4j.Slf4j;
 import org.junit.jupiter.api.*;
 import org.project.business.*;
-import org.project.business.dao.CarDAO;
-import org.project.business.dao.CustomerDAO;
-import org.project.business.dao.SalesmanDAO;
+import org.project.business.dao.*;
 import org.project.business.management.CarDealershipManagementService;
 import org.project.business.management.FileDataPreparationService;
 import org.project.infrastructure.configuration.HibernateUtil;
-import org.project.infrastructure.database.repository.CarDealershipManagementRepository;
-import org.project.infrastructure.database.repository.CarRepository;
-import org.project.infrastructure.database.repository.CustomerRepository;
-import org.project.infrastructure.database.repository.SalesmanRepository;
+import org.project.infrastructure.database.repository.*;
 
 @Slf4j
 @TestMethodOrder(MethodOrderer.OrderAnnotation.class)
 public class CarDealershipTest {
 
+    /// everything of this would be made easier with spring, to be continued...
+
     private CarDealershipManagementService carDealershipManagementService;
     private CarPurchaseService carPurchaseService;
     private CarServiceRequestService carServiceRequestService;
+    private CarServiceProcessingService carServiceProcessingService;
 
     @BeforeEach
     void beforeEach() {
-        CarDealershipManagementRepository carDealershipManagementService1 = new CarDealershipManagementRepository();
         CarDAO carDAO = new CarRepository();
         SalesmanDAO salesmanDAO = new SalesmanRepository();
         CustomerDAO customerDAO = new CustomerRepository();
+        CarServiceRequestDAO carServiceRequestDAO = new CarServiceRequestRepository();
+        MechanicDAO mechanicDAO = new MechanicRepository();
+        ServiceDAO serviceDAO = new ServiceRepository();
+        PartDAO partDAO = new PartRepository();
+        ServiceRequestProcessingDAO serviceRequestProcessingDAO = new ServiceRequestProcessingRepository();
+
+
+        MechanicService mechanicService = new MechanicService(mechanicDAO);
+        CarDealershipManagementRepository carDealershipManagementService = new CarDealershipManagementRepository();
+        ServiceCatalogService serviceCatalogService = new ServiceCatalogService(serviceDAO);
+        PartCatalogService partCatalogService = new PartCatalogService(partDAO);
         FileDataPreparationService fileDataPreparationService = new FileDataPreparationService();
         CarService carService = new CarService(carDAO);
         SalesmanService salesmanService = new SalesmanService(salesmanDAO);
         CustomerService customerService = new CustomerService(customerDAO);
         this.carDealershipManagementService = new CarDealershipManagementService(
-                carDealershipManagementService1,
+                carDealershipManagementService,
                 fileDataPreparationService
         );
 
@@ -47,7 +55,21 @@ public class CarDealershipTest {
         this.carServiceRequestService = new CarServiceRequestService(
                 fileDataPreparationService,
                 carService,
-                customerService
+                customerService,
+                carServiceRequestDAO
+        );
+
+        this.carServiceProcessingService = new CarServiceProcessingService(
+            fileDataPreparationService,
+                mechanicService,
+                carService,
+                serviceCatalogService,
+                partCatalogService,
+                carServiceRequestService,
+                serviceRequestProcessingDAO
+
+
+
         );
 
 
@@ -92,6 +114,7 @@ public class CarDealershipTest {
     @Order(5)
     void processServiceRequests() {
         log.info("### RUNNING ORDER 5");
+        carServiceProcessingService.process();
     }
 
     @Test

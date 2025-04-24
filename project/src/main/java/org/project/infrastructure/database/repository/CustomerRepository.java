@@ -65,7 +65,6 @@ public class CustomerRepository implements CustomerDAO {
                     .filter(request -> Objects.isNull(request.getCarServiceRequestId()))
                     .forEach(session::persist);
             session.getTransaction().commit();
-
         }
     }
 
@@ -77,7 +76,6 @@ public class CustomerRepository implements CustomerDAO {
                 throw new RuntimeException("Session is null");
             }
             session.beginTransaction();
-
             session.persist(entity);
             session.getTransaction().commit();
             return entity;

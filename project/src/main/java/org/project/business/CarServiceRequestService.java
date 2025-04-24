@@ -1,6 +1,7 @@
 package org.project.business;
 
 import lombok.AllArgsConstructor;
+import org.project.business.dao.CarServiceRequestDAO;
 import org.project.business.management.FileDataPreparationService;
 import org.project.domain.CarServiceRequest;
 import org.project.infrastructure.database.entity.CarServiceRequestEntity;
@@ -12,6 +13,7 @@ import java.time.OffsetDateTime;
 import java.util.List;
 import java.util.Map;
 import java.util.Random;
+import java.util.Set;
 import java.util.stream.Collectors;
 
 @AllArgsConstructor
@@ -20,6 +22,7 @@ public class CarServiceRequestService {
     private final FileDataPreparationService fileDataPreparationService;
     private final CarService carService;
     private final CustomerService customerService;
+    private final CarServiceRequestDAO carServiceRequestDAO;
 
     public void requestService() {
 
@@ -88,14 +91,26 @@ public class CarServiceRequestService {
                 when.getHour(),
                 when.getMinute(),
                 when.getSecond(),
-                randomInt(10,100)
+                randomInt(10, 100)
         );
     }
 
     @SuppressWarnings("SameParameterValue")
     private int randomInt(int min, int max) {
-        return new Random().nextInt(max-min)+min;
+        return new Random().nextInt(max - min) + min;
 
     }
 
+    public CarServiceRequestEntity findAnyActiveServiceRequest(String carVin) {
+
+        Set<CarServiceRequestEntity> serviceRequests = carServiceRequestDAO.findActiveServiceRequestsByCarVin(carVin);
+        if (serviceRequests.size() != 1) {
+            throw new RuntimeException(
+                    "There should be only one active service request at a time, car vin: [%s]".formatted(carVin));
+        }
+        return serviceRequests.stream()
+                .findAny()
+                .orElseThrow(() -> new RuntimeException("could not find any service requests, car vin: [%s]".formatted(carVin)));
+
+    }
 }
