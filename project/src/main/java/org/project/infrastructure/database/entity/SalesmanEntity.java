@@ -34,7 +34,4 @@ public class SalesmanEntity {
     private Set<InvoiceEntity> invoices;
 
 
-
-
-
 }

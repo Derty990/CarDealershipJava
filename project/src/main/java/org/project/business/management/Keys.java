@@ -2,7 +2,7 @@ package org.project.business.management;
 
 public interface Keys {
 
-    enum InputDataGroup{
+    enum InputDataGroup {
         INIT,
         BUY_FIRST_TIME,
         BUY_AGAIN,
@@ -10,11 +10,11 @@ public interface Keys {
         DO_THE_SERVICE
     }
 
-    enum Entity{
+    enum Entity {
         SALESMAN, MECHANIC, CAR, SERVICE, PART, CUSTOMER
     }
 
-    enum CONSTANTS{
+    enum CONSTANTS {
         WHAT,
         FINISHED
     }

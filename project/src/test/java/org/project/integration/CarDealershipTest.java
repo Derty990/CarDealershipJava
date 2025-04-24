@@ -19,6 +19,7 @@ public class CarDealershipTest {
     private CarPurchaseService carPurchaseService;
     private CarServiceRequestService carServiceRequestService;
     private CarServiceProcessingService carServiceProcessingService;
+    private CarService carService;
 
     @BeforeEach
     void beforeEach() {
@@ -60,7 +61,7 @@ public class CarDealershipTest {
         );
 
         this.carServiceProcessingService = new CarServiceProcessingService(
-            fileDataPreparationService,
+                fileDataPreparationService,
                 mechanicService,
                 carService,
                 serviceCatalogService,
@@ -69,7 +70,10 @@ public class CarDealershipTest {
                 serviceRequestProcessingDAO
 
 
+        );
 
+        this.carService = new CarService(
+                carDAO
         );
 
 
@@ -121,6 +125,8 @@ public class CarDealershipTest {
     @Order(6)
     void printCarHistory() {
         log.info("### RUNNING ORDER 6");
+        carService.printCarHistory("2C3CDYAG2DH731952");
+        carService.printCarHistory("1GCEC19X27Z109567");
     }
 
 

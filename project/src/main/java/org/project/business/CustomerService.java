@@ -7,7 +7,6 @@ import org.project.infrastructure.database.entity.AddressEntity;
 import org.project.infrastructure.database.entity.CustomerEntity;
 
 import java.util.Optional;
-import java.util.Set;
 
 @AllArgsConstructor
 public class CustomerService {
@@ -49,8 +48,7 @@ public class CustomerService {
                         .postalCode(customer.getAddress().getPostalCode())
                         .address(customer.getAddress().getAddress())
                         .build())
-                        .build();
-
+                .build();
 
 
         return customerDAO.saveCustomer(entity);

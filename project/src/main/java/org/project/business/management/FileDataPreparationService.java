@@ -1,7 +1,6 @@
 package org.project.business.management;
 
 
-import jakarta.persistence.*;
 import org.project.domain.CarServiceProcessingRequest;
 import org.project.domain.CarServiceRequest;
 import org.project.infrastructure.database.entity.*;
@@ -81,7 +80,7 @@ public class FileDataPreparationService {
 
     private CarServiceRequest.Customer createCustomer(List<String> inputData) {
 
-        if(inputData.size()==1){
+        if (inputData.size() == 1) {
             return CarServiceRequest.Customer.builder()
                     .email(inputData.get(0))
                     .build();
@@ -104,7 +103,7 @@ public class FileDataPreparationService {
 
     private CarServiceRequest.Car createCar(List<String> inputData) {
 
-        if(inputData.size()==1){
+        if (inputData.size() == 1) {
             return CarServiceRequest.Car.builder()
                     .vin(inputData.get(0))
                     .build();

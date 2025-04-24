@@ -1,6 +1,5 @@
 package org.project.business.management;
 
-import jakarta.persistence.Column;
 import lombok.experimental.UtilityClass;
 import org.project.infrastructure.database.entity.*;
 

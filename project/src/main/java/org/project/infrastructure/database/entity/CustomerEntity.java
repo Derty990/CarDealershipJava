@@ -46,7 +46,7 @@ public class CustomerEntity {
     private Set<CarServiceRequestEntity> carServiceRequests;
 
     public void addServiceRequest(CarServiceRequestEntity carServiceRequestEntity) {
-        if(Objects.isNull(carServiceRequests)){
+        if (Objects.isNull(carServiceRequests)) {
             this.carServiceRequests = new HashSet<>();
         }
         carServiceRequests.add(carServiceRequestEntity);

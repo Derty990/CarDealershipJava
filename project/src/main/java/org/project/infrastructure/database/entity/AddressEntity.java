@@ -23,7 +23,7 @@ public class AddressEntity {
     private String country;
 
     @Column(name = "city")
-    private String city; 
+    private String city;
 
     @Column(name = "postal_code")
     private String postalCode;

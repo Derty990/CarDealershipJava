@@ -11,11 +11,11 @@ public class CarDealershipManagementService {
     private final CarDealershipManagementDAO carDealershipManagementService;
     private final FileDataPreparationService fileDataPreparationService;
 
-    public void purge(){
+    public void purge() {
         carDealershipManagementService.purge();
     }
 
-    public void init(){
+    public void init() {
         List<?> entities = fileDataPreparationService.prepareInitData();
         carDealershipManagementService.saveAll(entities);
     }

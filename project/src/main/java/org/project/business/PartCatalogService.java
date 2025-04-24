@@ -7,7 +7,7 @@ import org.project.infrastructure.database.entity.PartEntity;
 import java.util.Optional;
 
 @AllArgsConstructor
-public class PartCatalogService{
+public class PartCatalogService {
 
     private final PartDAO partDAO;
 

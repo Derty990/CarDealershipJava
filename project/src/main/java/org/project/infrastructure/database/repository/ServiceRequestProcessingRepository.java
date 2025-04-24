@@ -4,7 +4,6 @@ import org.hibernate.Session;
 import org.project.business.dao.ServiceRequestProcessingDAO;
 import org.project.infrastructure.configuration.HibernateUtil;
 import org.project.infrastructure.database.entity.CarServiceRequestEntity;
-import org.project.infrastructure.database.entity.PartEntity;
 import org.project.infrastructure.database.entity.ServiceMechanicEntity;
 import org.project.infrastructure.database.entity.ServicePartEntity;
 
@@ -12,7 +11,6 @@ import java.util.Objects;
 
 
 public class ServiceRequestProcessingRepository implements ServiceRequestProcessingDAO {
-
 
 
     @Override
@@ -26,7 +24,7 @@ public class ServiceRequestProcessingRepository implements ServiceRequestProcess
             }
             session.beginTransaction();
             session.persist(serviceMechanicEntity);
-            if(Objects.nonNull(serviceRequest.getCompletedDateTime())){
+            if (Objects.nonNull(serviceRequest.getCompletedDateTime())) {
                 session.merge(serviceRequest);
             }
             session.getTransaction().commit();
@@ -47,12 +45,9 @@ public class ServiceRequestProcessingRepository implements ServiceRequestProcess
 
             session.persist(serviceMechanicEntity);
 
-//            Integer partId = servicePartEntity.getPart().getPartId();
-//            PartEntity partEntity = session.find(PartEntity.class, partId);
-//            servicePartEntity.setPart(partEntity);
             session.persist(servicePartEntity);
 
-            if(Objects.nonNull(serviceRequest.getCompletedDateTime())){
+            if (Objects.nonNull(serviceRequest.getCompletedDateTime())) {
                 session.merge(serviceRequest);
             }
 

@@ -47,7 +47,7 @@ public class InputDataCache {
             final Keys.InputDataGroup inputDataGroup,
             final Keys.Entity entity,
             final Function<String, T> mapper
-            ){
+    ) {
         return Optional.ofNullable(inputData.get(inputDataGroup.toString()))
                 .orElse(List.of())
                 .stream()
@@ -59,7 +59,7 @@ public class InputDataCache {
     public static <T> List<T> getInputData(
             final Keys.InputDataGroup inputDataGroup,
             final Function<String, T> mapper
-    ){
+    ) {
         return Optional.ofNullable(inputData.get(inputDataGroup.toString()))
                 .orElse(List.of())
                 .stream()

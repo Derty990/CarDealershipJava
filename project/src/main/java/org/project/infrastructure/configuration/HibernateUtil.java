@@ -8,7 +8,6 @@ import org.hibernate.boot.MetadataSources;
 import org.hibernate.boot.registry.StandardServiceRegistry;
 import org.hibernate.boot.registry.StandardServiceRegistryBuilder;
 import org.hibernate.cfg.Environment;
-import org.hibernate.service.ServiceRegistry;
 import org.project.infrastructure.database.entity.*;
 
 import java.util.Map;
@@ -40,7 +39,7 @@ public class HibernateUtil {
 
     private static SessionFactory loadSessionFactory() {
 
-        try{
+        try {
             StandardServiceRegistry standardServiceRegistry = new StandardServiceRegistryBuilder()
                     .applySettings(HIBERNATE_SETTINGS)
                     .applySettings(HIKARI_CP_SETTINGS)
@@ -64,24 +63,24 @@ public class HibernateUtil {
                     .build();
 
             return metadata.getSessionFactoryBuilder().build();
-        }catch (Throwable ex){
-                throw new ExceptionInInitializerError(ex);
+        } catch (Throwable ex) {
+            throw new ExceptionInInitializerError(ex);
         }
 
     }
 
-    public static void closeSessionFactory(){
-        try{
+    public static void closeSessionFactory() {
+        try {
             sessionFactory.close();
-        }catch (Throwable ex){
+        } catch (Throwable ex) {
             log.error("Exception while closing session factory", ex);
         }
     }
 
-    public static Session getSession(){
-        try{
+    public static Session getSession() {
+        try {
             return sessionFactory.openSession();
-        }catch (Throwable ex){
+        } catch (Throwable ex) {
             log.error("Exception while opening session", ex);
         }
         return null;

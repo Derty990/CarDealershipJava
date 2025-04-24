@@ -38,13 +38,13 @@ public class CarServiceProcessingService {
 
         ServiceMechanicEntity serviceMechanicEntity = buildServiceMechanicEntity(request, mechanic, serviceRequest, service);
 
-        if(Keys.CONSTANTS.FINISHED.toString().equals(request.getDone())){
+        if (Keys.CONSTANTS.FINISHED.toString().equals(request.getDone())) {
             serviceRequest.setCompletedDateTime(OffsetDateTime.now());
         }
 
-        if(Objects.isNull(request.getPartSerialNumber()) || Objects.isNull(request.getPartQuantity())){
+        if (Objects.isNull(request.getPartSerialNumber()) || Objects.isNull(request.getPartQuantity())) {
             serviceRequestProcessingDAO.process(serviceRequest, serviceMechanicEntity);
-        }else {
+        } else {
             PartEntity part = partCatalogService.findPart(request.getPartSerialNumber());
             ServicePartEntity servicePartEntity = buildServicePartEntity(request, serviceRequest, part);
             serviceRequestProcessingDAO.process(serviceRequest, serviceMechanicEntity, servicePartEntity);

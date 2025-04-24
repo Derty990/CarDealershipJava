@@ -47,24 +47,24 @@ CREATE TABLE customer
 
 CREATE TABLE car_to_buy
 (
-    car_to_buy_id   SERIAL          NOT NULL,
-    vin             VARCHAR(20)     NOT NULL,
-    brand           VARCHAR(32)     NOT NULL,
-    model           VARCHAR(32)     NOT NULL,
-    year            SMALLINT        NOT NULL,
-    color           VARCHAR(32),
-    price           NUMERIC(19, 2)  NOT NULL,
+    car_to_buy_id SERIAL         NOT NULL,
+    vin           VARCHAR(20)    NOT NULL,
+    brand         VARCHAR(32)    NOT NULL,
+    model         VARCHAR(32)    NOT NULL,
+    year          SMALLINT       NOT NULL,
+    color         VARCHAR(32),
+    price         NUMERIC(19, 2) NOT NULL,
     PRIMARY KEY (car_to_buy_id),
     UNIQUE (vin)
 );
 
 CREATE TABLE car_to_service
 (
-    car_to_service_id SERIAL    NOT NULL,
-    vin    VARCHAR(20)          NOT NULL,
-    brand  VARCHAR(32)          NOT NULL,
-    model  VARCHAR(32)          NOT NULL,
-    year   SMALLINT             NOT NULL,
+    car_to_service_id SERIAL      NOT NULL,
+    vin               VARCHAR(20) NOT NULL,
+    brand             VARCHAR(32) NOT NULL,
+    model             VARCHAR(32) NOT NULL,
+    year              SMALLINT    NOT NULL,
     PRIMARY KEY (car_to_service_id),
     UNIQUE (vin)
 );
@@ -80,10 +80,10 @@ CREATE TABLE service
 
 CREATE TABLE part
 (
-    part_id       SERIAL            NOT NULL,
-    serial_number VARCHAR(32)       NOT NULL,
-    description   VARCHAR(64)       NOT NULL,
-    price         NUMERIC(19, 2)    NOT NULL,
+    part_id       SERIAL         NOT NULL,
+    serial_number VARCHAR(32)    NOT NULL,
+    description   VARCHAR(64)    NOT NULL,
+    price         NUMERIC(19, 2) NOT NULL,
     PRIMARY KEY (part_id),
     UNIQUE (serial_number)
 );
@@ -120,13 +120,13 @@ CREATE TABLE invoice
 
 CREATE TABLE car_service_request
 (
-    car_service_request_id      SERIAL                      NOT NULL,
-    car_service_request_number  VARCHAR(32)                 NOT NULL,
-    received_date_time          TIMESTAMP WITH TIME ZONE    NOT NULL,
-    completed_date_time         TIMESTAMP WITH TIME ZONE,
-    customer_comment            TEXT,
-    customer_id                 INT                         NOT NULL,
-    car_to_service_id           INT                         NOT NULL,
+    car_service_request_id     SERIAL                   NOT NULL,
+    car_service_request_number VARCHAR(32)              NOT NULL,
+    received_date_time         TIMESTAMP WITH TIME ZONE NOT NULL,
+    completed_date_time        TIMESTAMP WITH TIME ZONE,
+    customer_comment           TEXT,
+    customer_id                INT                      NOT NULL,
+    car_to_service_id          INT                      NOT NULL,
     PRIMARY KEY (car_service_request_id),
     UNIQUE (car_service_request_number),
     CONSTRAINT fk_car_service_request_customer
@@ -139,10 +139,10 @@ CREATE TABLE car_service_request
 
 CREATE TABLE service_part
 (
-    service_part_id         SERIAL   NOT NULL,
-    quantity                INT      NOT NULL,
-    car_service_request_id  INT      NOT NULL,
-    part_id                 INT      NOT NULL,
+    service_part_id        SERIAL NOT NULL,
+    quantity               INT    NOT NULL,
+    car_service_request_id INT    NOT NULL,
+    part_id                INT    NOT NULL,
     PRIMARY KEY (service_part_id),
     CONSTRAINT fk_service_part_service_request
         FOREIGN KEY (car_service_request_id)
@@ -154,12 +154,12 @@ CREATE TABLE service_part
 
 CREATE TABLE service_mechanic
 (
-    service_mechanic_id SERIAL          NOT NULL,
-    hours                   INT         NOT NULL,
-    comment                 VARCHAR(32) NOT NULL,
-    car_service_request_id  INT         NOT NULL,
-    mechanic_id             INT         NOT NULL,
-    service_id              INT         NOT NULL,
+    service_mechanic_id    SERIAL      NOT NULL,
+    hours                  INT         NOT NULL,
+    comment                VARCHAR(32) NOT NULL,
+    car_service_request_id INT         NOT NULL,
+    mechanic_id            INT         NOT NULL,
+    service_id             INT         NOT NULL,
     PRIMARY KEY (service_mechanic_id),
     CONSTRAINT fk_service_mechanic_car_service_request
         FOREIGN KEY (car_service_request_id)
