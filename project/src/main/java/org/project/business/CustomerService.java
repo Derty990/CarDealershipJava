@@ -2,10 +2,12 @@ package org.project.business;
 
 import lombok.AllArgsConstructor;
 import org.project.business.dao.CustomerDAO;
+import org.project.domain.CarServiceRequest;
+import org.project.infrastructure.database.entity.AddressEntity;
 import org.project.infrastructure.database.entity.CustomerEntity;
-import org.project.infrastructure.database.entity.SalesmanEntity;
 
 import java.util.Optional;
+import java.util.Set;
 
 @AllArgsConstructor
 public class CustomerService {
@@ -25,6 +27,33 @@ public class CustomerService {
             throw new RuntimeException("Could not find customer by email: [%s]".formatted(email));
         }
         return customer.get();
+
+    }
+
+    public void saveServiceRequest(CustomerEntity customer) {
+
+        customerDAO.saveServiceRequest(customer);
+
+    }
+
+    public CustomerEntity saveCustomer(CarServiceRequest.Customer customer) {
+
+        CustomerEntity entity = CustomerEntity.builder()
+                .name(customer.getName())
+                .surname(customer.getSurname())
+                .telephone(customer.getTelephone())
+                .email(customer.getEmail())
+                .address(AddressEntity.builder()
+                        .country(customer.getAddress().getCountry())
+                        .city(customer.getAddress().getCity())
+                        .postalCode(customer.getAddress().getPostalCode())
+                        .address(customer.getAddress().getAddress())
+                        .build())
+                        .build();
+
+
+
+        return customerDAO.saveCustomer(entity);
 
     }
 }

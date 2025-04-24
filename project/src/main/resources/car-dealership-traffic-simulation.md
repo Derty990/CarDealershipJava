@@ -52,7 +52,7 @@ SERVICE_REQUEST -> CUSTOMER -> alf.samoch@gmail.com -> CAR -> 2C3CDYAG2DH731952 
 SERVICE_REQUEST -> CUSTOMER -> tom.zim@gmail.com -> CAR -> 1GCEC19X27Z109567 -> WHAT -> Olej mi cieknie na stopy 
 
 [//]: # (Teraz do warsztatu przychodzą klienci, którzy nie kupili samochodu u tego dealera)
-SERVICE_REQUEST -> CUSTOMER -> Adrian;Paczkomat;+48 991 221 123;adr.paczk@gmail.com;Polska;Szczecin;10-001;Górna 15 -> CAR -> 1N4BA41E18C806520;BMW;Series 1;2015 -> WHAT -> Coś nie działa prawidłowo
+SERVICE_REQUEST -> CUSTOMER -> Adrian;Paczkomat;+48 991 221 123;adr.paczk@gmail.com;Polska;Szczecin;10-001;Górna 15 -> CAR -> 1N4BA41E18C806520;BMW;Series 1;2015;black -> WHAT -> Coś nie działa prawidłowo
 
 [//]: # (Później, każdy mechanik sprawdza, czy została do niego przydzielona jakaś praca.)
 [//]: # (service_code;quantity:product_code;quantity;comment;finished)

@@ -2,7 +2,9 @@ package org.project.business;
 
 import lombok.AllArgsConstructor;
 import org.project.business.dao.CarDAO;
+import org.project.domain.CarServiceRequest;
 import org.project.infrastructure.database.entity.CarToBuyEntity;
+import org.project.infrastructure.database.entity.CarToServiceEntity;
 
 import java.util.Optional;
 
@@ -15,10 +17,39 @@ public class CarService {
     public CarToBuyEntity findCarToBuy(String vin) {
 
         Optional<CarToBuyEntity> carToBuyByVin = carDAO.findCarToBuyByVin(vin);
-        if(carToBuyByVin.isEmpty()){
+        if (carToBuyByVin.isEmpty()) {
             throw new RuntimeException("Could not find car by vin: [%s]".formatted(vin));
         }
         return carToBuyByVin.get();
 
+    }
+
+    public Optional<CarToServiceEntity> findCarToService(String vin) {
+
+        return carDAO.findCarToServiceByVin(vin);
+
+    }
+
+    public CarToServiceEntity saveCarToService(CarToBuyEntity carToBuy) {
+
+        CarToServiceEntity entity = CarToServiceEntity.builder()
+                .vin(carToBuy.getVin())
+                .brand(carToBuy.getBrand())
+                .model(carToBuy.getModel())
+                .year(carToBuy.getYear())
+                .build();
+        return carDAO.saveCarToService(entity);
+
+    }
+
+    public CarToServiceEntity saveCarToService(CarServiceRequest.Car car) {
+        CarToServiceEntity entity = CarToServiceEntity.builder()
+                .vin(car.getVin())
+                .brand(car.getBrand())
+                .model(car.getModel())
+                .year(car.getYear())
+                .build();
+
+        return carDAO.saveCarToService(entity);
     }
 }

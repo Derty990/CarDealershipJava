@@ -35,9 +35,6 @@ public class CarToServiceEntity {
     @Column(name = "year")
     private Integer year;
 
-    @Column(name = "color")
-    private String color;
-
     @OneToMany(fetch = FetchType.LAZY, mappedBy = "car")
     private Set<CarServiceRequestEntity> carServiceRequests;
 

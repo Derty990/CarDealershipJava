@@ -9,4 +9,8 @@ public interface CustomerDAO {
 
     void issueInvoice(CustomerEntity customer);
 
+    void saveServiceRequest(CustomerEntity customer);
+
+    CustomerEntity saveCustomer(CustomerEntity entity);
+
 }
