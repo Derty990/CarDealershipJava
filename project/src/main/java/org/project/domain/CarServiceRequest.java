@@ -1,60 +1,25 @@
 package org.project.domain;
 
-import lombok.Builder;
-import lombok.Getter;
-import lombok.Value;
-import lombok.With;
+import lombok.*;
 
-import java.util.Objects;
+import java.time.OffsetDateTime;
+import java.util.Set;
 
 @With
 @Value
-@Getter
 @Builder
+@EqualsAndHashCode(of = "carServiceRequestId")
+@ToString(of = {"carServiceRequestId", "carServiceRequestNumber", "receivedDateTime", "completedDateTime", "customerComment"})
 public class CarServiceRequest {
 
-    Customer customer;
-    Car car;
+
+    Integer carServiceRequestId;
+    String carServiceRequestNumber;
+    OffsetDateTime receivedDateTime;
+    OffsetDateTime completedDateTime;
     String customerComment;
-
-    @With
-    @Value
-    @Builder
-    public static class Customer {
-        String name;
-        String surname;
-        String phone;
-        String email;
-        Address address;
-    }
-
-    @With
-    @Value
-    @Builder
-    public static class Car {
-        String vin;
-        String brand;
-        String model;
-        Integer year;
-
-        public Boolean shouldExistInCarToBuy() {
-
-            return Objects.isNull(brand)
-                    && Objects.isNull(model)
-                    && Objects.isNull(year);
-
-        }
-    }
-
-    @With
-    @Value
-    @Builder
-    public static class Address {
-        String country;
-        String city;
-        String postalCode;
-        String address;
-    }
-
-
+    Customer customer;
+    CarToService car;
+    Set<ServiceMechanic> serviceMechanics;
+    Set<ServicePart> serviceParts;
 }

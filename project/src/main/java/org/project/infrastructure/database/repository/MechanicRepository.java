@@ -20,7 +20,7 @@ public class MechanicRepository implements MechanicDAO {
             }
             session.beginTransaction();
 
-            String query = "SELECT se FROM MechanicEntity se WHERE se.pesel = :pesel";
+            String query = "SELECT se FROM MechanicJpaRepository se WHERE se.pesel = :pesel";
             Optional<MechanicEntity> result = session.createQuery(query, MechanicEntity.class)
                     .setParameter("pesel", pesel)
                     .uniqueResultOptional();
