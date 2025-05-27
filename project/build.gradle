@@ -2,11 +2,13 @@ plugins {
     id 'java'
 }
 
-group = 'org.example'
+group = 'pl.zajavka'
 version = '1.0'
+sourceCompatibility = '17'
 
 repositories {
     mavenCentral()
+    maven {url 'https://repo.spring.io/milestone'}
 }
 
 dependencies {
@@ -15,17 +17,27 @@ dependencies {
     compileOnly "org.projectlombok:lombok:$lombokVersion"
     annotationProcessor "org.projectlombok:lombok:$lombokVersion"
 
+    implementation"org.springframework:spring-core:$springVersion"
+    implementation"org.springframework:spring-beans:$springVersion"
+    implementation"org.springframework:spring-context:$springVersion"
+    implementation"org.springframework:spring-context-support:$springVersion"
+    implementation"org.springframework:spring-expression:$springVersion"
+    implementation"org.springframework:spring-jdbc:$springVersion"
+    implementation"org.springframework:spring-tx:$springVersion"
+
+    implementation"org.springframework.data:spring-data-jpa:$springDataVersion"
+
     implementation "org.hibernate.orm:hibernate-core:$hibernateVersion"
     implementation "org.hibernate.orm:hibernate-hikaricp:$hibernateVersion"
     implementation "com.zaxxer:HikariCP:$hikariVersion"
     implementation "org.postgresql:postgresql:$postgresqlVersion"
+    implementation "org.flywaydb:flyway-core:$flywayVersion"
 
     testCompileOnly "org.projectlombok:lombok:$lombokVersion"
     testAnnotationProcessor "org.projectlombok:lombok:$lombokVersion"
 
     testImplementation "org.junit.jupiter:junit-jupiter-api:$junitVersion"
     testRuntimeOnly "org.junit.jupiter:junit-jupiter-engine:$junitVersion"
-
 }
 
 test {
@@ -35,4 +47,4 @@ test {
     }
 }
 
-compileJava.options.encoding = "UTF-8"
+compileJava.options.encoding = 'UTF-8'

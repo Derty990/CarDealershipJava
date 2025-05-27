@@ -30,7 +30,7 @@ public class CustomerEntity {
     private String surname;
 
     @Column(name = "phone")
-    private String telephone;
+    private String phone;
 
     @Column(name = "email")
     private String email;

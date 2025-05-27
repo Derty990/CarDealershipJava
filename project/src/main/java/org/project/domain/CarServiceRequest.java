@@ -23,7 +23,7 @@ public class CarServiceRequest {
     public static class Customer {
         String name;
         String surname;
-        String telephone;
+        String phone;
         String email;
         Address address;
     }

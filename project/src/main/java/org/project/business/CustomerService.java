@@ -40,7 +40,7 @@ public class CustomerService {
         CustomerEntity entity = CustomerEntity.builder()
                 .name(customer.getName())
                 .surname(customer.getSurname())
-                .telephone(customer.getTelephone())
+                .phone(customer.getPhone())
                 .email(customer.getEmail())
                 .address(AddressEntity.builder()
                         .country(customer.getAddress().getCountry())

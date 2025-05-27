@@ -28,47 +28,38 @@ public class CarPurchaseService {
         List<CustomerEntity> firstTimeCustomers = firstTimeData.stream()
                 .map(this::createFirstTimeToBuyCustomer)
                 .toList();
-
         firstTimeCustomers.forEach(customerService::issueInvoice);
-
 
         List<CustomerEntity> nextTimeCustomers = nextTimeData.stream()
                 .map(this::createNextTimeToBuyCustomer)
                 .toList();
-
         nextTimeCustomers.forEach(customerService::issueInvoice);
-
     }
 
     private CustomerEntity createFirstTimeToBuyCustomer(Map<String, List<String>> inputData) {
-
         CarToBuyEntity car = carService.findCarToBuy(inputData.get(Keys.Entity.CAR.toString()).get(0));
         SalesmanEntity salesman = salesmanService.findSalesman(inputData.get(Keys.Entity.SALESMAN.toString()).get(0));
         InvoiceEntity invoice = buildInvoice(car, salesman);
 
-        return FileDataPreparationService.buildCustomerEntity(inputData.get(Keys.Entity.CUSTOMER.toString()), invoice);
-
+        return fileDataPreparationService.buildCustomerEntity(inputData.get(Keys.Entity.CUSTOMER.toString()), invoice);
     }
 
     private CustomerEntity createNextTimeToBuyCustomer(Map<String, List<String>> inputData) {
-
         CustomerEntity existingCustomer = customerService.findCustomer(inputData.get(Keys.Entity.CUSTOMER.toString()).get(0));
         CarToBuyEntity car = carService.findCarToBuy(inputData.get(Keys.Entity.CAR.toString()).get(0));
         SalesmanEntity salesman = salesmanService.findSalesman(inputData.get(Keys.Entity.SALESMAN.toString()).get(0));
         InvoiceEntity invoice = buildInvoice(car, salesman);
         existingCustomer.getInvoices().add(invoice);
-
         return existingCustomer;
-
     }
 
     private InvoiceEntity buildInvoice(CarToBuyEntity car, SalesmanEntity salesman) {
         return InvoiceEntity.builder()
                 .invoiceNumber(UUID.randomUUID().toString())
                 .dateTime(OffsetDateTime.now())
-                .salesman(salesman)
                 .car(car)
+                .salesman(salesman)
                 .build();
     }
-
 }
+

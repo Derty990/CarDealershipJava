@@ -14,7 +14,6 @@ import org.project.infrastructure.database.repository.*;
 public class CarDealershipTest {
 
     /// everything of this would be made easier with spring, to be continued...
-
     private CarDealershipManagementService carDealershipManagementService;
     private CarPurchaseService carPurchaseService;
     private CarServiceRequestService carServiceRequestService;
@@ -23,43 +22,38 @@ public class CarDealershipTest {
 
     @BeforeEach
     void beforeEach() {
+        CarDealershipManagementRepository carDealershipManagementDAO = new CarDealershipManagementRepository();
         CarDAO carDAO = new CarRepository();
         SalesmanDAO salesmanDAO = new SalesmanRepository();
         CustomerDAO customerDAO = new CustomerRepository();
-        CarServiceRequestDAO carServiceRequestDAO = new CarServiceRequestRepository();
         MechanicDAO mechanicDAO = new MechanicRepository();
         ServiceDAO serviceDAO = new ServiceRepository();
         PartDAO partDAO = new PartRepository();
-        ServiceRequestProcessingDAO serviceRequestProcessingDAO = new ServiceRequestProcessingRepository();
-
-
-        MechanicService mechanicService = new MechanicService(mechanicDAO);
-        CarDealershipManagementRepository carDealershipManagementService = new CarDealershipManagementRepository();
+        CarServiceRequestDAO carServiceRequestDAO = new CarServiceRequestRepository();
+        FileDataPreparationService fileDataPreparationService = new FileDataPreparationService();
         ServiceCatalogService serviceCatalogService = new ServiceCatalogService(serviceDAO);
         PartCatalogService partCatalogService = new PartCatalogService(partDAO);
-        FileDataPreparationService fileDataPreparationService = new FileDataPreparationService();
         CarService carService = new CarService(carDAO);
-        SalesmanService salesmanService = new SalesmanService(salesmanDAO);
+        ServiceRequestProcessingDAO serviceRequestProcessingDAO = new ServiceRequestProcessingRepository();
         CustomerService customerService = new CustomerService(customerDAO);
+        SalesmanService salesmanService = new SalesmanService(salesmanDAO);
+        MechanicService mechanicService = new MechanicService(mechanicDAO);
         this.carDealershipManagementService = new CarDealershipManagementService(
-                carDealershipManagementService,
+                carDealershipManagementDAO,
                 fileDataPreparationService
         );
-
         this.carPurchaseService = new CarPurchaseService(
                 fileDataPreparationService,
                 customerService,
                 carService,
                 salesmanService
         );
-
         this.carServiceRequestService = new CarServiceRequestService(
                 fileDataPreparationService,
                 carService,
                 customerService,
                 carServiceRequestDAO
         );
-
         this.carServiceProcessingService = new CarServiceProcessingService(
                 fileDataPreparationService,
                 mechanicService,
@@ -68,15 +62,10 @@ public class CarDealershipTest {
                 partCatalogService,
                 carServiceRequestService,
                 serviceRequestProcessingDAO
-
-
         );
-
         this.carService = new CarService(
                 carDAO
         );
-
-
     }
 
     @AfterAll
@@ -89,7 +78,6 @@ public class CarDealershipTest {
     void purge() {
         log.info("### RUNNING ORDER 1");
         carDealershipManagementService.purge();
-
     }
 
     @Test
@@ -111,7 +99,6 @@ public class CarDealershipTest {
     void makeServiceRequests() {
         log.info("### RUNNING ORDER 4");
         carServiceRequestService.requestService();
-
     }
 
     @Test
@@ -128,6 +115,4 @@ public class CarDealershipTest {
         carService.printCarHistory("2C3CDYAG2DH731952");
         carService.printCarHistory("1GCEC19X27Z109567");
     }
-
-
 }

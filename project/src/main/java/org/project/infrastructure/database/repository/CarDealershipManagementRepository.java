@@ -11,7 +11,7 @@ public class CarDealershipManagementRepository implements CarDealershipManagemen
 
     @Override
     public void purge() {
-        try (Session session = HibernateUtil.getSession()) {
+        try (Session session = org.project.infrastructure.database.repository.HibernateUtil.getSession()) {
             if (Objects.isNull(session)) {
                 throw new RuntimeException("Session is null");
             }
