@@ -1,11 +1,11 @@
 package org.project.business.dao;
 
-import org.project.infrastructure.database.entity.CarServiceRequestEntity;
-import org.project.infrastructure.database.entity.ServiceMechanicEntity;
-import org.project.infrastructure.database.entity.ServicePartEntity;
+import org.project.domain.CarServiceRequest;
+import org.project.domain.ServiceMechanic;
+import org.project.domain.ServicePart;
 
 public interface ServiceRequestProcessingDAO {
-    void process(CarServiceRequestEntity serviceRequest, ServiceMechanicEntity serviceMechanicEntity);
+    void process(CarServiceRequest serviceRequest, ServiceMechanic serviceMechanic);
 
-    void process(CarServiceRequestEntity serviceRequest, ServiceMechanicEntity serviceMechanicEntity, ServicePartEntity servicePartEntity);
+    void process(CarServiceRequest serviceRequest, ServiceMechanic serviceMechanic, ServicePart servicePart);
 }

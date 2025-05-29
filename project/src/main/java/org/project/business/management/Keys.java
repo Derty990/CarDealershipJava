@@ -9,11 +9,14 @@ public interface Keys {
         DO_THE_SERVICE
     }
 
-    enum Entity {
-        SALESMAN, MECHANIC, CAR, SERVICE, PART, CUSTOMER
+    enum Domain {
+        SALESMAN,
+        MECHANIC,
+        CAR,
+        CUSTOMER
     }
 
-    enum CONSTANTS {
+    enum Constants {
         WHAT,
         FINISHED
     }

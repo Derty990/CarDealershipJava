@@ -1,10 +1,10 @@
 package org.project.business.dao;
 
-import org.project.infrastructure.database.entity.SalesmanEntity;
+import org.project.domain.Salesman;
 
 import java.util.Optional;
 
 public interface SalesmanDAO {
 
-    Optional<SalesmanEntity> findByPesel(String pesel);
+    Optional<Salesman> findByPesel(String pesel);
 }

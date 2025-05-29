@@ -3,6 +3,7 @@ package org.project.domain;
 
 import lombok.*;
 
+import java.util.Objects;
 import java.util.Set;
 
 @With
@@ -19,4 +20,12 @@ public class CarToService {
     Integer year;
     Set<CarServiceRequest> carServiceRequests;
 
+    public boolean carBoughtHere() {
+
+        return Objects.nonNull(vin)
+                && Objects.isNull(brand)
+                && Objects.isNull(model)
+                && Objects.isNull(year);
+
+    }
 }

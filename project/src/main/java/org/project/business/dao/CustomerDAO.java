@@ -1,16 +1,16 @@
 package org.project.business.dao;
 
-import org.project.infrastructure.database.entity.CustomerEntity;
+import org.project.domain.Customer;
 
 import java.util.Optional;
 
 public interface CustomerDAO {
-    Optional<CustomerEntity> findByEmail(String email);
+    Optional<Customer> findByEmail(String email);
 
-    void issueInvoice(CustomerEntity customer);
+    void issueInvoice(Customer customer);
 
-    void saveServiceRequest(CustomerEntity customer);
+    void saveServiceRequest(Customer customer);
 
-    CustomerEntity saveCustomer(CustomerEntity entity);
+    Customer saveCustomer(Customer entity);
 
 }
