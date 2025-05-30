@@ -1,35 +1,27 @@
 package org.project.infrastructure.database.repository;
 
-import org.hibernate.Session;
+import lombok.AllArgsConstructor;
 import org.project.business.dao.SalesmanDAO;
-import org.project.infrastructure.configuration.HibernateUtil;
-import org.project.infrastructure.database.entity.SalesmanEntity;
+import org.project.domain.Salesman;
+import org.project.infrastructure.database.repository.jpa.SalesmanJpaRepository;
+import org.springframework.stereotype.Repository;
 
-import java.util.Objects;
 import java.util.Optional;
 
+@Repository
+@AllArgsConstructor
 public class SalesmanRepository implements SalesmanDAO {
+
+    private final SalesmanJpaRepository salesmanJpaRepository;
+    private final SalesmanMapper salesmanMapper;
 
 
     @Override
-    public Optional<SalesmanEntity> findByPesel(String pesel) {
-
-        try (Session session = HibernateUtil.getSession()) {
-            if (Objects.isNull(session)) {
-                throw new RuntimeException("Session is null");
-            }
-            session.beginTransaction();
-
-            String query = "SELECT se FROM SalesmanJpaRepository se WHERE se.pesel = :pesel";
-            Optional<SalesmanEntity> result = session.createQuery(query, SalesmanEntity.class)
-                    .setParameter("pesel", pesel)
-                    .uniqueResultOptional();
-
-            session.getTransaction().commit();
-            return result;
-
-
-        }
+    public Optional<Salesman> findByPesel(String pesel) {
+        return salesmanJpaRepository.findByPesel(pesel)
+                .map(salesmanMapper::mapFromEntity);
 
     }
+
+
 }
