@@ -1,9 +1,10 @@
 package org.project.business.dao;
 
-import org.project.domain.CarServiceRequest;
+import org.project.domain.CarToBuy;
 
-import java.util.Set;
+import java.util.Optional;
 
 public interface CarToBuyDAO {
-    Set<CarServiceRequest> findActiveServiceRequestsByCarVin(String carVin);
+
+    Optional<CarToBuy> findCarToBuyByVin(String vin);
 }

@@ -4,6 +4,7 @@ import lombok.AllArgsConstructor;
 import org.project.business.dao.CarServiceRequestDAO;
 import org.project.domain.CarServiceRequest;
 import org.project.infrastructure.database.repository.jpa.CarServiceRequestJpaRepository;
+import org.project.infrastructure.database.repository.mapper.CarServiceRequestEntityMapper;
 import org.springframework.stereotype.Repository;
 
 import java.util.Set;
@@ -19,7 +20,7 @@ public class CarServiceRequestRepository implements CarServiceRequestDAO {
     @Override
     public Set<CarServiceRequest> findActiveServiceRequestsByCarVin(String carVin) {
         return carServiceRequestJpaRepository.findActiveServiceRequestsByCarVin(carVin).stream()
-                .map(obj -> carServiceRequestEntityMapper.mapFromEntity(obj))
+                .map(carServiceRequestEntityMapper::mapFromEntity)
                 .collect(Collectors.toSet());
 
     }

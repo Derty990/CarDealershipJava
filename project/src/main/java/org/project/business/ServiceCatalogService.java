@@ -3,6 +3,7 @@ package org.project.business;
 import lombok.AllArgsConstructor;
 import org.project.business.dao.ServiceDAO;
 import org.project.domain.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.Optional;
 
@@ -10,6 +11,7 @@ import java.util.Optional;
 public class ServiceCatalogService {
     private final ServiceDAO serviceDAO;
 
+    @Transactional
     public Service findService(String serviceCode) {
 
         Optional<Service> service = serviceDAO.findByServiceCode(serviceCode);

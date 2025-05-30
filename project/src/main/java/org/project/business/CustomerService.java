@@ -4,6 +4,7 @@ import lombok.AllArgsConstructor;
 import org.project.business.dao.CustomerDAO;
 import org.project.domain.Address;
 import org.project.domain.Customer;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.Optional;
 
@@ -18,6 +19,7 @@ public class CustomerService {
 
     }
 
+    @Transactional
     public Customer findCustomer(String email) {
 
         Optional<Customer> customer = customerDAO.findByEmail(email);
@@ -28,29 +30,17 @@ public class CustomerService {
 
     }
 
+    @Transactional
     public void saveServiceRequest(Customer customer) {
 
         customerDAO.saveServiceRequest(customer);
 
     }
 
+    @Transactional
     public Customer saveCustomer(Customer customer) {
 
-        Customer entity = Customer.builder()
-                .name(customer.getName())
-                .surname(customer.getSurname())
-                .phone(customer.getPhone())
-                .email(customer.getEmail())
-                .address(Address.builder()
-                        .country(customer.getAddress().getCountry())
-                        .city(customer.getAddress().getCity())
-                        .postalCode(customer.getAddress().getPostalCode())
-                        .address(customer.getAddress().getAddress())
-                        .build())
-                .build();
-
-
-        return customerDAO.saveCustomer(entity);
+        return customerDAO.saveCustomer(customer);
 
     }
 }

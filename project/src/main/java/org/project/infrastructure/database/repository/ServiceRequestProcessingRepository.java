@@ -13,6 +13,8 @@ import org.project.infrastructure.database.repository.jpa.CarServiceRequestJpaRe
 import org.project.infrastructure.database.repository.jpa.PartJpaRepository;
 import org.project.infrastructure.database.repository.jpa.ServiceMechanicJpaRepository;
 import org.project.infrastructure.database.repository.jpa.ServicePartJpaRepository;
+import org.project.infrastructure.database.repository.mapper.ServiceMechanicEntityMapper;
+import org.project.infrastructure.database.repository.mapper.ServicePartEntityMapper;
 import org.springframework.stereotype.Repository;
 
 import java.util.Objects;

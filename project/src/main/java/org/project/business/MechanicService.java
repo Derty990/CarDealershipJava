@@ -3,6 +3,7 @@ package org.project.business;
 import lombok.AllArgsConstructor;
 import org.project.business.dao.MechanicDAO;
 import org.project.domain.Mechanic;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.Optional;
 
@@ -11,6 +12,7 @@ public class MechanicService {
 
     private final MechanicDAO mechanicDAO;
 
+    @Transactional
     public Mechanic findMechanic(String pesel) {
 
         Optional<Mechanic> mechanic = mechanicDAO.findByPesel(pesel);

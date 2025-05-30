@@ -12,7 +12,6 @@ import java.util.Set;
 @ToString(of = {"carServiceRequestId", "carServiceRequestNumber", "receivedDateTime", "completedDateTime", "customerComment"})
 public class CarServiceRequest {
 
-
     Integer carServiceRequestId;
     String carServiceRequestNumber;
     OffsetDateTime receivedDateTime;

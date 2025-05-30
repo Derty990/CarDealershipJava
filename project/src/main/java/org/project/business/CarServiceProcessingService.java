@@ -5,6 +5,7 @@ import org.project.business.dao.ServiceRequestProcessingDAO;
 import org.project.business.management.FileDataPreparationService;
 import org.project.business.management.Keys;
 import org.project.domain.*;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.time.OffsetDateTime;
 import java.util.List;
@@ -21,6 +22,7 @@ public class CarServiceProcessingService {
     private final CarServiceRequestService carServiceRequestService;
     private final ServiceRequestProcessingDAO serviceRequestProcessingDAO;
 
+    @Transactional
     public void process() {
 
         List<CarServiceProcessingInputData> toProcess = fileDataPreparationService.prepareServiceRequestsToProcess();

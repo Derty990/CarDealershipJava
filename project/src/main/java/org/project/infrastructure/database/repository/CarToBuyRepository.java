@@ -2,23 +2,24 @@ package org.project.infrastructure.database.repository;
 
 import lombok.AllArgsConstructor;
 import org.project.business.dao.CarToBuyDAO;
-import org.project.domain.CarServiceRequest;
+import org.project.domain.CarToBuy;
 import org.project.infrastructure.database.repository.jpa.CarToBuyJpaRepository;
+import org.project.infrastructure.database.repository.mapper.CarToBuyEntityMapper;
 import org.springframework.stereotype.Repository;
 
-import java.util.Set;
+import java.util.Optional;
 
 @Repository
 @AllArgsConstructor
 public class CarToBuyRepository implements CarToBuyDAO {
 
     private final CarToBuyJpaRepository carToBuyJpaRepository;
-    private final CarToBuyMapper carToBuyMapper;
+    private final CarToBuyEntityMapper carToBuyEntityMapper;
 
     @Override
-    public Set<CarServiceRequest> findActiveServiceRequestsByCarVin(String vin) {
+    public Optional<CarToBuy> findCarToBuyByVin(String vin) {
         return carToBuyJpaRepository.findByVin(vin)
-                .map(carToBuyMapper::mapFromEntity);
+                .map(carToBuyEntityMapper::mapFromEntity);
     }
 }
 

@@ -9,6 +9,9 @@ import org.project.infrastructure.database.entity.InvoiceEntity;
 import org.project.infrastructure.database.repository.jpa.CarServiceRequestJpaRepository;
 import org.project.infrastructure.database.repository.jpa.CustomerJpaRepository;
 import org.project.infrastructure.database.repository.jpa.InvoiceJpaRepository;
+import org.project.infrastructure.database.repository.mapper.CarServiceRequestEntityMapper;
+import org.project.infrastructure.database.repository.mapper.CustomerEntityMapper;
+import org.project.infrastructure.database.repository.mapper.InvoiceEntityMapper;
 import org.springframework.stereotype.Repository;
 
 import java.util.List;
@@ -61,7 +64,7 @@ public class CustomerRepository implements CustomerDAO {
 
     @Override
     public Customer saveCustomer(Customer customer) {
-        CustomerEntity toSave = customerEntityMapper.mapToEntity(entity);
+        CustomerEntity toSave = customerEntityMapper.mapToEntity(customer);
         CustomerEntity saved = customerJpaRepository.save(toSave);
         return customerEntityMapper.mapFromEntity(saved);
 

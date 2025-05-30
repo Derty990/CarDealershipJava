@@ -3,6 +3,7 @@ package org.project.business;
 import lombok.AllArgsConstructor;
 import org.project.business.dao.SalesmanDAO;
 import org.project.domain.Salesman;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.Optional;
 
@@ -11,6 +12,7 @@ public class SalesmanService {
 
     private final SalesmanDAO salesmanDAO;
 
+    @Transactional
     public Salesman findSalesman(String pesel) {
 
         Optional<Salesman> salesman = salesmanDAO.findByPesel(pesel);

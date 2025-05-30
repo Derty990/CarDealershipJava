@@ -8,7 +8,7 @@ import java.util.Optional;
 public interface CarToServiceDAO {
     Optional<CarToService> findCarToServiceByVin(String vin);
 
-    CarToService saveCarToService(CarToService entity);
+    CarToService saveCarToService(CarToService car);
 
     CarHistory findCarHistoryByVin(String vin);
 }

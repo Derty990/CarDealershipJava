@@ -3,6 +3,7 @@ package org.project.business;
 import lombok.AllArgsConstructor;
 import org.project.business.management.FileDataPreparationService;
 import org.project.domain.*;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.time.OffsetDateTime;
 import java.util.List;
@@ -16,6 +17,7 @@ public class CarPurchaseService {
     private final CarService carService;
     private final SalesmanService salesmanService;
 
+    @Transactional
     public void purchase() {
         var firstTimeData = fileDataPreparationService.prepareFirstTimePurchaseData();
         var nextTimeData = fileDataPreparationService.prepareNextTimePurchaseData();

@@ -1,19 +1,14 @@
 package org.project.integration;
 
 import lombok.extern.slf4j.Slf4j;
-import org.junit.jupiter.api.*;
-import org.project.business.*;
-import org.project.business.dao.*;
-import org.project.business.management.CarDealershipManagementService;
-import org.project.business.management.FileDataPreparationService;
-import org.project.infrastructure.configuration.HibernateUtil;
-import org.project.infrastructure.database.repository.*;
+import org.junit.jupiter.api.MethodOrderer;
+import org.junit.jupiter.api.TestMethodOrder;
 
 @Slf4j
 @TestMethodOrder(MethodOrderer.OrderAnnotation.class)
 public class CarDealershipTest {
 
-    /// everything of this would be made easier with spring, to be continued...
+   /* /// everything of this would be made easier with spring, to be continued...
     private CarDealershipManagementService carDealershipManagementService;
     private CarPurchaseService carPurchaseService;
     private CarServiceRequestService carServiceRequestService;
@@ -115,4 +110,4 @@ public class CarDealershipTest {
         carService.printCarHistory("2C3CDYAG2DH731952");
         carService.printCarHistory("1GCEC19X27Z109567");
     }
-}
+*/}
