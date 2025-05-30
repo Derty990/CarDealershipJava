@@ -3,11 +3,13 @@ package org.project.business;
 import lombok.AllArgsConstructor;
 import org.project.business.dao.SalesmanDAO;
 import org.project.domain.Salesman;
+import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.util.Optional;
 
 @AllArgsConstructor
+@Service
 public class SalesmanService {
 
     private final SalesmanDAO salesmanDAO;

@@ -7,12 +7,14 @@ import org.project.business.dao.CarToServiceDAO;
 import org.project.domain.CarHistory;
 import org.project.domain.CarToBuy;
 import org.project.domain.CarToService;
+import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.util.Optional;
 
 @Slf4j
 @AllArgsConstructor
+@Service
 public class CarService {
 
     private final CarToBuyDAO carToBuyDAO;

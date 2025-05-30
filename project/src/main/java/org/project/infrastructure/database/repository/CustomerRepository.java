@@ -5,7 +5,6 @@ import org.project.business.dao.CustomerDAO;
 import org.project.domain.Customer;
 import org.project.infrastructure.database.entity.CarServiceRequestEntity;
 import org.project.infrastructure.database.entity.CustomerEntity;
-import org.project.infrastructure.database.entity.InvoiceEntity;
 import org.project.infrastructure.database.repository.jpa.CarServiceRequestJpaRepository;
 import org.project.infrastructure.database.repository.jpa.CustomerJpaRepository;
 import org.project.infrastructure.database.repository.jpa.InvoiceJpaRepository;
@@ -15,6 +14,7 @@ import org.project.infrastructure.database.repository.mapper.InvoiceEntityMapper
 import org.springframework.stereotype.Repository;
 
 import java.util.List;
+import java.util.Objects;
 import java.util.Optional;
 
 @Repository
@@ -40,13 +40,14 @@ public class CustomerRepository implements CustomerDAO {
     @Override
     public void issueInvoice(Customer customer) {
         CustomerEntity customerToSave = customerEntityMapper.mapToEntity(customer);
-        CustomerEntity customerSaved = customerJpaRepository.save(customerToSave);
+        CustomerEntity customerSaved = customerJpaRepository.saveAndFlush(customerToSave);
 
         customer.getInvoices().stream()
+                .filter(invoice -> Objects.isNull(invoice.getInvoiceId()))
                 .map(invoiceEntityMapper::mapToEntity)
-                .forEach((InvoiceEntity entity) -> {
-                    entity.setCustomer(customerSaved);
-                    invoiceJpaRepository.saveAndFlush(entity);
+                .forEach(invoiceEntity -> {
+                    invoiceEntity.setCustomer(customerSaved);
+                    invoiceJpaRepository.saveAndFlush(invoiceEntity);
                 });
 
     }

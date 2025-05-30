@@ -4,11 +4,13 @@ import lombok.AllArgsConstructor;
 import org.project.business.dao.CustomerDAO;
 import org.project.domain.Address;
 import org.project.domain.Customer;
+import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.util.Optional;
 
 @AllArgsConstructor
+@Service
 public class CustomerService {
 
     private final CustomerDAO customerDAO;

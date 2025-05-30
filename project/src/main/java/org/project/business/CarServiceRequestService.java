@@ -7,6 +7,7 @@ import org.project.domain.CarServiceRequest;
 import org.project.domain.CarToBuy;
 import org.project.domain.CarToService;
 import org.project.domain.Customer;
+import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.time.OffsetDateTime;
@@ -17,6 +18,7 @@ import java.util.Set;
 import java.util.stream.Collectors;
 
 @AllArgsConstructor
+@Service
 public class CarServiceRequestService {
 
     private final FileDataPreparationService fileDataPreparationService;

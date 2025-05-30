@@ -8,6 +8,7 @@ import org.springframework.transaction.annotation.Transactional;
 import java.util.Optional;
 
 @AllArgsConstructor
+@org.springframework.stereotype.Service
 public class ServiceCatalogService {
     private final ServiceDAO serviceDAO;
 

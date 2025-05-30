@@ -3,13 +3,16 @@ package org.project.business;
 import lombok.AllArgsConstructor;
 import org.project.business.management.FileDataPreparationService;
 import org.project.domain.*;
+import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.time.OffsetDateTime;
 import java.util.List;
+import java.util.Set;
 import java.util.UUID;
 
 @AllArgsConstructor
+@Service
 public class CarPurchaseService {
 
     private final FileDataPreparationService fileDataPreparationService;
@@ -17,7 +20,6 @@ public class CarPurchaseService {
     private final CarService carService;
     private final SalesmanService salesmanService;
 
-    @Transactional
     public void purchase() {
         var firstTimeData = fileDataPreparationService.prepareFirstTimePurchaseData();
         var nextTimeData = fileDataPreparationService.prepareNextTimePurchaseData();
@@ -46,8 +48,9 @@ public class CarPurchaseService {
         CarToBuy car = carService.findCarToBuy(inputData.getCarVin());
         Salesman salesman = salesmanService.findSalesman(inputData.getSalesmanPesel());
         Invoice invoice = buildInvoice(car, salesman);
-        existingCustomer.getInvoices().add(invoice);
-        return existingCustomer;
+        Set<Invoice> existingInvoices = existingCustomer.getInvoices();
+        existingInvoices.add(invoice);
+        return existingCustomer.withInvoices(existingInvoices);
     }
 
     private Invoice buildInvoice(CarToBuy car, Salesman salesman) {
