@@ -26,7 +26,6 @@ public class CarServiceRequestService {
     private final CustomerService customerService;
     private final CarServiceRequestDAO carServiceRequestDAO;
 
-    @Transactional
     public void requestService() {
 
         Map<Boolean, List<CarServiceRequest>> serviceRequests = fileDataPreparationService.createCarServiceRequests()
@@ -66,7 +65,7 @@ public class CarServiceRequestService {
         CarServiceRequest carServiceRequest = buildCarServiceRequest(request, car, customer);
         Set<CarServiceRequest> existingCarServiceRequests = customer.getCarServiceRequests();
         existingCarServiceRequests.add(carServiceRequest);
-        customerService.saveServiceRequest(customer);
+        customerService.saveServiceRequest(customer.withCarServiceRequests(existingCarServiceRequests));
 
     }
 

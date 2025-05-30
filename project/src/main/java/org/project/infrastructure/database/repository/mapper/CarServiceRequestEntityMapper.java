@@ -16,6 +16,8 @@ public interface CarServiceRequestEntityMapper {
     @Mapping(target = "serviceParts", ignore = true)
     CarServiceRequest mapFromEntity(CarServiceRequestEntity entity);
 
+    @Mapping(target = "customer.address", ignore = true)
+    @Mapping(target = "customer.carServiceRequests", ignore = true)
     CarServiceRequestEntity mapToEntity(CarServiceRequest entity);
 
 }

@@ -1,5 +1,7 @@
 package org.project.infrastructure.configuration;
 
+import com.zaxxer.hikari.HikariConfig;
+import com.zaxxer.hikari.HikariDataSource;
 import jakarta.persistence.EntityManagerFactory;
 import lombok.AllArgsConstructor;
 import org.flywaydb.core.Flyway;
@@ -68,17 +70,6 @@ public class persistenceJPAConfiguration {
     }
 
     @Bean
-    public DataSource dataSource() {
-        DriverManagerDataSource dataSource = new DriverManagerDataSource();
-        dataSource.setDriverClassName(Objects.requireNonNull(environment.getProperty("jdbc.driverClassName")));
-        dataSource.setUrl(environment.getProperty("jdbc.url"));
-        dataSource.setUsername(environment.getProperty("jdbc.user"));
-        dataSource.setPassword(environment.getProperty("jdbc.pass"));
-        return dataSource;
-
-    }
-
-    @Bean
     public PlatformTransactionManager transactionManager(final EntityManagerFactory entityManagerFactory) {
         final JpaTransactionManager transactionManager = new JpaTransactionManager();
         transactionManager.setEntityManagerFactory(entityManagerFactory);
@@ -97,6 +88,37 @@ public class persistenceJPAConfiguration {
         configuration.setLocations(new Location("filesystem:src/main/resources/flyway/migrations"));
         configuration.setDataSource(dataSource());
         return new Flyway(configuration);
+
+    }
+
+    /*@Bean
+    public DataSource dataSource() {
+        DriverManagerDataSource dataSource = new DriverManagerDataSource();
+        dataSource.setDriverClassName(Objects.requireNonNull(environment.getProperty("jdbc.driverClassName")));
+        dataSource.setUrl(environment.getProperty("jdbc.url"));
+        dataSource.setUsername(environment.getProperty("jdbc.user"));
+        dataSource.setPassword(environment.getProperty("jdbc.pass"));
+        return dataSource;
+
+    }*/
+
+    @Bean(destroyMethod = "close")
+    public HikariDataSource dataSource() {
+        HikariConfig hikariConfig = new HikariConfig();
+        hikariConfig.setDriverClassName(Objects.requireNonNull(environment.getProperty("jdbc.driverClassName")));
+        hikariConfig.setJdbcUrl(environment.getProperty("jdbc.url"));
+        hikariConfig.setUsername(environment.getProperty("jdbc.user"));
+        hikariConfig.setPassword(environment.getProperty("jdbc.pass"));
+
+        hikariConfig.setConnectionTestQuery("SELECT 1");
+        hikariConfig.setPoolName("springHikariCP");
+
+        hikariConfig.setMaximumPoolSize(20);
+        hikariConfig.setConnectionTimeout(20000);
+        hikariConfig.setMinimumIdle(10);
+        hikariConfig.setIdleTimeout(300000);
+
+        return new HikariDataSource(hikariConfig);
 
     }
 

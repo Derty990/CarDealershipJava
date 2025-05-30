@@ -16,6 +16,7 @@ import org.project.infrastructure.database.repository.jpa.ServicePartJpaReposito
 import org.project.infrastructure.database.repository.mapper.ServiceMechanicEntityMapper;
 import org.project.infrastructure.database.repository.mapper.ServicePartEntityMapper;
 import org.springframework.stereotype.Repository;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.Objects;
 
@@ -31,6 +32,7 @@ public class ServiceRequestProcessingRepository implements ServiceRequestProcess
     private final ServicePartEntityMapper servicePartEntityMapper;
 
     @Override
+    @Transactional
     public void process(
             CarServiceRequest serviceRequest,
             ServiceMechanic serviceMechanic
@@ -47,6 +49,7 @@ public class ServiceRequestProcessingRepository implements ServiceRequestProcess
     }
 
     @Override
+    @Transactional
     public void process(
             CarServiceRequest serviceRequest,
             ServiceMechanic serviceMechanic,

@@ -31,6 +31,7 @@ public interface CustomerEntityMapper {
     @Mapping(target = "salesman", ignore = true)
     Invoice mapFromEntity(InvoiceEntity entity);
 
+    @Mapping(target = "carServiceRequests", ignore = true)
     CustomerEntity mapToEntity(Customer customer);
 
 }
