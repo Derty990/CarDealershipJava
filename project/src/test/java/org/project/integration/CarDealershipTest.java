@@ -1,3 +1,4 @@
+/*
 package org.project.integration;
 
 import lombok.AllArgsConstructor;
@@ -44,7 +45,6 @@ public class CarDealershipTest {
         registry.add("jdbc.pass", POSTGRESQL_CONTAINER::getPassword);
 
     }
-
 
     private CarPurchaseService carPurchaseService;
     private CarServiceRequestService carServiceRequestService;
@@ -107,3 +107,4 @@ public class CarDealershipTest {
     }
 
 }
+*/

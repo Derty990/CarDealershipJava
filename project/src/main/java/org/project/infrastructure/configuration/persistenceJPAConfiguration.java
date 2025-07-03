@@ -1,3 +1,4 @@
+/*
 package org.project.infrastructure.configuration;
 
 import com.zaxxer.hikari.HikariConfig;
@@ -33,7 +34,8 @@ import java.util.Properties;
 @PropertySource({"classpath:database.properties"})
 @EnableTransactionManagement
 public class persistenceJPAConfiguration {
-      /* private static final Map<String, Object> HIBERNATE_SETTINGS = Map.ofEntries(
+      */
+/* private static final Map<String, Object> HIBERNATE_SETTINGS = Map.ofEntries(
             Map.entry(Environment.CONNECTION_PROVIDER, "org.hibernate.hikaricp.internal.HikariCPConnectionProvider"),
     );
 
@@ -43,7 +45,8 @@ public class persistenceJPAConfiguration {
             Map.entry("hibernate.hikari.maximumPoolSize", "20"),
             Map.entry("hibernate.hikari.idleTimeout", "300000")
 
-    );*/
+    );*//*
+
 
     private final org.springframework.core.env.Environment environment;
 
@@ -91,7 +94,8 @@ public class persistenceJPAConfiguration {
 
     }
 
-    /*@Bean
+    */
+/*@Bean
     public DataSource dataSource() {
         DriverManagerDataSource dataSource = new DriverManagerDataSource();
         dataSource.setDriverClassName(Objects.requireNonNull(environment.getProperty("jdbc.driverClassName")));
@@ -100,7 +104,8 @@ public class persistenceJPAConfiguration {
         dataSource.setPassword(environment.getProperty("jdbc.pass"));
         return dataSource;
 
-    }*/
+    }*//*
+
 
     @Bean(destroyMethod = "close")
     public HikariDataSource dataSource() {
@@ -123,3 +128,4 @@ public class persistenceJPAConfiguration {
     }
 
 }
+*/

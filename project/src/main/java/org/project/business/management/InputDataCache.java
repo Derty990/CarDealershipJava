@@ -1,3 +1,4 @@
+/*
 package org.project.business.management;
 
 import lombok.experimental.UtilityClass;
@@ -14,7 +15,6 @@ import java.util.stream.Collectors;
 
 @UtilityClass //cannot create instantion of this class
 public class InputDataCache {
-
 
     private static final Map<String, List<String>> inputData;
 
@@ -55,3 +55,4 @@ public class InputDataCache {
                 .toList();
     }
 }
+*/

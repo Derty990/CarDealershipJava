@@ -1,3 +1,4 @@
+/*
 package org.project.business.management;
 
 
@@ -144,3 +145,4 @@ public class FileDataPreparationService {
                 .collect(Collectors.toMap(grouped::get, i -> List.of(grouped.get(i + 1).split(";"))));
     }
 }
+*/

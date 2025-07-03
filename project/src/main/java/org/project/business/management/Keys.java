@@ -1,3 +1,4 @@
+/*
 package org.project.business.management;
 
 public interface Keys {
@@ -22,3 +23,4 @@ public interface Keys {
     }
 
 }
+*/
