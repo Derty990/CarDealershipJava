@@ -7,6 +7,7 @@ import org.project.infrastructure.database.repository.jpa.CarToBuyJpaRepository;
 import org.project.infrastructure.database.repository.mapper.CarToBuyEntityMapper;
 import org.springframework.stereotype.Repository;
 
+import java.util.List;
 import java.util.Optional;
 
 @Repository
@@ -15,6 +16,16 @@ public class CarToBuyRepository implements CarToBuyDAO {
 
     private final CarToBuyJpaRepository carToBuyJpaRepository;
     private final CarToBuyEntityMapper carToBuyEntityMapper;
+
+    @Override
+    public List<CarToBuy> findAvailable() {
+
+        return carToBuyJpaRepository.findAvailableCars().stream()
+                .map(carToBuyEntityMapper::mapFromEntity)
+                .toList();
+
+
+    }
 
     @Override
     public Optional<CarToBuy> findCarToBuyByVin(String vin) {

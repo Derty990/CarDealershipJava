@@ -12,6 +12,9 @@ repositories {
 }
 
 dependencies {
+
+    implementation "org.hibernate.validator:hibernate-validator:$hibernateValidatorVersion"
+
     implementation "ch.qos.logback:logback-classic:$logbackVersion"
 
     compileOnly "org.projectlombok:lombok:$lombokVersion"

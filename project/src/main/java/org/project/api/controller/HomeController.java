@@ -8,13 +8,12 @@ import org.springframework.web.bind.annotation.RequestMethod;
 @Controller
 @AllArgsConstructor
 public class HomeController {
-    
+
     private static final String HOME = "/";
 
     @RequestMapping(value = HOME, method = RequestMethod.GET)
     public String homePage(){
         return "home";
     }
-
 
 }

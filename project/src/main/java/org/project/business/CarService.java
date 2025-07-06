@@ -10,15 +10,24 @@ import org.project.domain.CarToService;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.util.List;
 import java.util.Optional;
 
 @Slf4j
 @AllArgsConstructor
 @Service
 public class CarService {
-
     private final CarToBuyDAO carToBuyDAO;
+
     private final CarToServiceDAO carToServiceDAO;
+
+    @Transactional
+    public List<CarToBuy> findAvailableCars() {
+       List<CarToBuy> availableCars = carToBuyDAO.findAvailable();
+       log.info("Available cars: [{}]", availableCars.size());
+       return availableCars;
+
+    }
 
     @Transactional
     public CarToBuy findCarToBuy(String vin) {
@@ -73,6 +82,5 @@ public class CarService {
         serviceRequest.getParts().forEach(part -> log.info("### PART: [{}]", part));
 
     }
-
 
 }

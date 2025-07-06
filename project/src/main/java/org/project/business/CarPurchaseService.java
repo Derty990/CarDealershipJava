@@ -1,26 +1,27 @@
 package org.project.business;
 
 import lombok.AllArgsConstructor;
-import org.project.business.management.FileDataPreparationService;
-import org.project.domain.*;
+import org.project.domain.CarToBuy;
 import org.springframework.stereotype.Service;
-import org.springframework.transaction.annotation.Transactional;
 
-import java.time.OffsetDateTime;
 import java.util.List;
-import java.util.Set;
-import java.util.UUID;
 
 @AllArgsConstructor
 @Service
 public class CarPurchaseService {
 
-    private final FileDataPreparationService fileDataPreparationService;
-    private final CustomerService customerService;
     private final CarService carService;
-    private final SalesmanService salesmanService;
 
-    public void purchase() {
+  /*  private final FileDataPreparationService fileDataPreparationService;
+    private final CustomerService customerService;
+    private final SalesmanService salesmanService;*/
+
+    public List<CarToBuy> availableCars() {
+        return carService.findAvailableCars();
+
+    }
+
+    /*  public void purchase() {
         var firstTimeData = fileDataPreparationService.prepareFirstTimePurchaseData();
         var nextTimeData = fileDataPreparationService.prepareNextTimePurchaseData();
 
@@ -60,6 +61,6 @@ public class CarPurchaseService {
                 .car(car)
                 .salesman(salesman)
                 .build();
-    }
+    }*/
 }
 

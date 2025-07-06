@@ -1,27 +1,13 @@
 package org.project.business;
 
 import lombok.AllArgsConstructor;
-import org.project.business.dao.CarServiceRequestDAO;
-import org.project.business.management.FileDataPreparationService;
-import org.project.domain.CarServiceRequest;
-import org.project.domain.CarToBuy;
-import org.project.domain.CarToService;
-import org.project.domain.Customer;
 import org.springframework.stereotype.Service;
-import org.springframework.transaction.annotation.Transactional;
-
-import java.time.OffsetDateTime;
-import java.util.List;
-import java.util.Map;
-import java.util.Random;
-import java.util.Set;
-import java.util.stream.Collectors;
 
 @AllArgsConstructor
 @Service
 public class CarServiceRequestService {
 
-    private final FileDataPreparationService fileDataPreparationService;
+   /* private final FileDataPreparationService fileDataPreparationService;
     private final CarService carService;
     private final CustomerService customerService;
     private final CarServiceRequestDAO carServiceRequestDAO;
@@ -118,5 +104,5 @@ public class CarServiceRequestService {
                 .findAny()
                 .orElseThrow(() -> new RuntimeException("could not find any service requests, car vin: [%s]".formatted(carVin)));
 
-    }
+    }*/
 }

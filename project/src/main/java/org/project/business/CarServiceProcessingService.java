@@ -1,19 +1,11 @@
 package org.project.business;
 
 import lombok.AllArgsConstructor;
-import org.project.business.dao.ServiceRequestProcessingDAO;
-import org.project.business.management.FileDataPreparationService;
-import org.project.business.management.Keys;
-import org.project.domain.*;
-import org.springframework.transaction.annotation.Transactional;
-
-import java.time.OffsetDateTime;
-import java.util.List;
-import java.util.Objects;
 
 @org.springframework.stereotype.Service
 @AllArgsConstructor
 public class CarServiceProcessingService {
+/*
 
     private final FileDataPreparationService fileDataPreparationService;
     private final MechanicService mechanicService;
@@ -83,6 +75,7 @@ public class CarServiceProcessingService {
                 .build();
 
     }
+*/
 
 
 }
